@@ -139,6 +139,81 @@ def PlayerM():#player menu
     BackB = Button(PlayerM, text="Quit", command=PlayerM.destroy)
     BackB.grid(row = 7,column = 4)
 
+def CheckLogin():#login check
+    flag = 0  
+         
+    for line in open("admin.txt","r").readlines(): # Read data base
+        login_info = line.split()  
+        if nameInput.get() == login_info[0] and passInput.get() == login_info[1]:
+            flag = 1
+            
+    for line in open("workers.txt","r").readlines(): # Read data base
+        login_info = line.split() 
+        if nameInput.get() == login_info[0] and passInput.get() == login_info[1]:
+            flag = 2
+            
+    for line in open("accountfile.txt","r").readlines(): 
+        login_info = line.split() 
+        if nameInput.get() == login_info[0] and passInput.get() == login_info[1]:
+            flag = 3
+                   
+    if flag == 1:
+        AdminM()
+    if flag == 2:
+        WorkerM()
+    if flag == 3:
+        PlayerM()
+    if flag == 0:
+        tkinter.messagebox.showinfo('bad log-in','invalid user name or password')#show message box if pass or user incorrect
+            
+           
+                
+def CSign():#update data base
+    global newnameInput
+    global newpassInput
+    file = open("accountfile.txt","a")
+    file.write(newnameInput.get())
+    file.write(" ")
+    file.write(newpassInput.get())
+    file.write("\n")
+    file.close()
+    
+def SignU():#sign-up window
+    global newnameInput
+    global newpassInput
+    SignU = Toplevel(Login)
+    SignU.geometry("500x500+120+120")
+    display = Label(SignU, text="SignUp:")
+    display.grid(row = 0,column = 1)
+    
+    newnameInput = Entry(SignU)
+    newpassInput = Entry(SignU)
+    
+   
+    
+    
+    newnameLabel = Label(SignU,text = "choose a name:")
+    newnameLabel.grid(row=1,column = 0,sticky = E)
+    newnameInput.grid(row=1,column = 1)
+
+    newpassLabel = Label(SignU,text = "choose a password:")
+    newpassLabel.grid(row=2,column = 0,sticky = E)
+    newpassInput.grid(row=2,column = 1)
+    
+
+    
+    
+    
+    
+    
+    
+    Sign = Button(SignU,text = "Sign-up",fg = "purple",command = CSign)
+    Sign.grid(row = 1,column = 3)
+
+    BackB = Button(SignU, text="Back", command=SignU.destroy)
+    BackB.grid(row = 7,column = 4)
+
+
 SignUp = Button(Login,text = "sign-up",fg = "black", command = SignU)
 SignUp.grid(row = 6,column = 0)
 
