@@ -1,0 +1,11 @@
+toptest 64
+toptest 42
+sec 3
+testname 0
+newname 0
+newname 0
+newname 0
+newname 0
+newname 0
+newname 0
+newname 0
